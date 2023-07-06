@@ -1,0 +1,107 @@
+{
+    "commands": [
+        {
+            "abrir": [
+                {
+                    "recarregar comando": "commands"
+                },
+                {
+                    "recarregar comandos": "commands"
+                },
+                {
+                    "recarregue os comandos": "commands"
+                },
+                {
+                    "recarregar os comandos": "commands"
+                },
+                {
+                    "abrir o lol": "path:C:/Riot Games/Riot Client/RiotClientServices.exe"
+                },
+                {
+                    "pesquisa por vídeo de *": "web?:https://youtube.com"
+                },
+                {
+                    "pesquise por vídeo de *": "web?:https://youtube.com"
+                },
+                {
+                    "pesquise vídeos de *": "web?:https://youtube.com"
+                },
+                {
+                    "pesquise vídeos sobre *": "web?:https://youtube.com"
+                },
+                {
+                    "pesquisa vídeos de *": "web?:https://youtube.com"
+                },
+                {
+                    "procure por vídeos de *": "web?:https://youtube.com"
+                },
+                {
+                    "procure vídeos de *": "web?:https://youtube.com"
+                },
+                {
+                    "pesquisa por vídeos do *": "web?:https://youtube.com"
+                },
+                {
+                    "pesquise por vídeos do *": "web?:https://youtube.com"
+                },
+                {
+                    "pesquise vídeos do *": "web?:https://youtube.com"
+                },
+                {
+                    "pesquisa vídeos do *": "web?:https://youtube.com"
+                },
+                {
+                    "procure por vídeos do *": "web?:https://youtube.com"
+                },
+                {
+                    "procure vídeos do *": "web?:https://youtube.com"
+                },
+                {
+                    "pesquisa sobre *": "web?:https://google.com"
+                },
+                {
+                    "pesquisa por *": "web?:https://google.com"
+                },
+                {
+                    "pesquise por *": "web?:https://google.com"
+                },
+                {
+                    "pesquise como *": "web?:https://google.com"
+                },
+                {
+                    "procure por *": "web?:https://google.com"
+                },
+                {
+                    "pesquise quais são *": "web?:https://google.com"
+                },
+                {
+                    "quais são *": "web?:https://google.com"
+                },
+                {
+                    "pesquise os *": "web?:https://google.com"
+                },
+                {
+                    "busque por *": "web?:https://google.com"
+                },
+                {
+                    "busca por *": "web?:https://google.com"
+                },
+                {
+                    "me diz *": "web?:https://google.com"
+                },
+                {
+                    "me diga *": "web?:https://google.com"
+                },
+                {
+                    "procure aí por *": "web?:https://google.com"
+                },
+                {
+                    "me mostre *": "web?:https://google.com"
+                },
+                {
+                    "me mostra como *": "web?:https://google.com"
+                }
+            ]
+        }
+    ]
+}
