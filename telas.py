@@ -28,11 +28,11 @@ class Janela(ctk.CTk):
         self.lb_img = ctk.CTkLabel(self.frameT,text="", image=self.liza)
         self.lb_img.grid(row=1, column=0, padx=20, pady=50)
        
-        self.titleB = ctk.CTkLabel(self.frameT, text="Faça o Login ou Cadastre-se\n em nossa plataforma para\n acessar os serviços de Liza!", font=("Roboto", 24, BOLD), )
+        self.titleB = ctk.CTkLabel(self.frameT, text="Faça o Login ou Cadastre-se\n em nosso site para\n acessar os serviços de Liza!", font=("Roboto", 24, BOLD), )
         self.titleB.grid(row=0, column=0, padx=10, pady=10)
         
         self.frame_login = ctk.CTkFrame(self, width=350, height=380)
-        self.frame_login.place(x=800, y=100)
+        self.frame_login.place(x=800, y=190)
         
         self.lb_title = ctk.CTkLabel(self.frame_login, text="Faça o login!", font=("Roboto", 22, BOLD))
         self.lb_title.grid(row=0, column=0, padx=10, pady=10)
