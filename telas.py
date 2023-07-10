@@ -1,21 +1,37 @@
+import email
 from tkinter import LEFT
 from tkinter.font import BOLD, ITALIC
 from turtle import color
 from PIL import ImageTk, Image
 import customtkinter as ctk
 import os
+import keyboard
 from Liza import AI
+import mysql.connector
+from CTkMessagebox import CTkMessagebox
+
 
 class Janela(ctk.CTk):
     def __init__(self):
         super().__init__()
+        self.usuario_logado = False
         self.configuracao_janela()
+        self.conectar_banco_dados()
         self.tela_login()
         
     def configuracao_janela(self):
         self.geometry("1200x620")
         self.title("Liza")
         self.resizable(False, False)
+    
+    def conectar_banco_dados(self):
+        # Estabelecer a conexão com o banco de dados MySQL
+        self.conexao = mysql.connector.connect(
+            host='liza.ctnmbcgeqio2.us-east-2.rds.amazonaws.com',
+            user='admin',
+            password='Digosamuca',
+            database='liza'
+        )
     
     def tela_login(self):
         
@@ -43,11 +59,31 @@ class Janela(ctk.CTk):
         self.senha_login_entry = ctk.CTkEntry(self.frame_login, placeholder_text="Senha", width=300,font=("Roboto", 16, BOLD), corner_radius=10, show="*")
         self.senha_login_entry.grid(row=2, column=0, padx=10, pady=10)
         
-        self.btn_login = ctk.CTkButton(self.frame_login,width=300, text="Fazer Login", font=("Roboto", 16, BOLD), corner_radius=10, command=lambda:self.tela_home())
+        self.btn_login = ctk.CTkButton(self.frame_login,width=300, text="Fazer Login", font=("Roboto", 16, BOLD), corner_radius=10, command=self.fazer_login)
         self.btn_login.grid(row=3, column=0, padx=10, pady=10)
+    
+    def fazer_login(self):
+        
+        usuario = self.usuario_login_entry.get()
+        senha = self.senha_login_entry.get()
+        
+        
+        cursor = self.conexao.cursor()
+        consulta = "SELECT * FROM usuarios WHERE email = %s AND senha = %s"
+        valores = (usuario, senha)
+        cursor.execute(consulta, valores)
+        
+       
+        if cursor.fetchone():
+           
+            self.tela_home()
+        else:
 
-   
-                    
+            CTkMessagebox(message="Usuario ou senha incorreto",icon="check", option_1="Okay")
+        
+
+        cursor.close()
+    
     def tela_home(self): 
         self.file_path = os.path.dirname(os.path.realpath(__file__))
         self.lizaimg = ctk.CTkImage(Image.open(self.file_path + "/liza.png"), size=(200,200))
@@ -60,22 +96,20 @@ class Janela(ctk.CTk):
         self.titleB = ctk.CTkLabel(self.navbar, text="Sua Liza já está preparada! Aperte o botão ou pressione a tecla F1\n em seu computador e tudo será controlado por voz!", font=("Roboto", 24, BOLD))
         self.titleB.grid(row=0, column=0, padx=10, pady=10)
         
-        self.btn_login = ctk.CTkButton(self.navbar,width=30, image=self.lizaimg,text="", font=("Roboto", 16, BOLD), corner_radius=200, command=lambda:self.lizaEscute())
+        self.btn_login = ctk.CTkButton(self.navbar,width=30, image=self.lizaimg,text="", font=("Roboto", 16, BOLD), corner_radius=200, command=self.lizaEscute)
         self.btn_login.grid(row=3, column=0, padx=10, pady=10)
         self.bind("<F1>", lambda event: self.lizaEscute())
+        
+        if keyboard.is_pressed('f1'):
+            self.lizaEscute()
+        
+        
              
     def lizaEscute(self):
         self.Liza=AI()
         self.Liza.listen()
         
-        
-          
-    def limpa_cadastro(self):
-        self.usuario_cadastro_entry.delete(0, END)
-        self.senha_cadastro_entry.delete(0, END)
-        self.confirm_senha_cadastro_entry.delete(0, END)
-        self.nascimento_entry.delete(0, END)
-        self.email_entry.delete(0, END)
+    
 
         
 if __name__ == "__main__":
