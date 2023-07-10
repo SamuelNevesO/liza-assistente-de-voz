@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(
-    ['seu_programa.py'],
+    ['telas.py'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -28,7 +28,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='seu_programa',
+    name='telas',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

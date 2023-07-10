@@ -1,14 +1,12 @@
 import speech_recognition as sr
 import pyttsx3
-from pydub import AudioSegment
-from pydub.playback import play
+
 import json
 from modules import controle
 
 class AI:
     def __init__(self):
         self.recognizer = sr.Recognizer()
-        self.SOM_INICIO = AudioSegment.from_wav("bip.wav")
         self.tts_engine = pyttsx3.init()
         self.VOICE_COMMANDS = []
         self.read_commands_file()
@@ -21,7 +19,7 @@ class AI:
         self.tts_engine.runAndWait()
 
     def listen(self):
-        play(self.SOM_INICIO)
+       
 
         with sr.Microphone() as source:
             audio = self.recognizer.listen(source, None, 5)
@@ -84,7 +82,7 @@ class AI:
                         try:
                             return self.run_commands(command_section, command_action, argument)
                         except:
-                            self.speak(f"Ocorreu um problema no comando {voice_command}. Tente de novo")
+                            self.speak(f"Ocorreu um problema no comando {voice_command}.")
                             return False
         return False
 

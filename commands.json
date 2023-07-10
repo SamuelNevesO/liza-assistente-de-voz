@@ -15,9 +15,6 @@
                     "recarregar os comandos": "commands"
                 },
                 {
-                    "abrir o lol": "path:C:/Riot Games/Riot Client/RiotClientServices.exe"
-                },
-                {
                     "pesquisa por vídeo de *": "web?:https://youtube.com"
                 },
                 {
@@ -96,10 +93,76 @@
                     "procure aí por *": "web?:https://google.com"
                 },
                 {
+                    "pesquise aí por *": "web?:https://google.com"
+                },
+                {
                     "me mostre *": "web?:https://google.com"
                 },
                 {
+                    "como *": "web?:https://google.com"
+                },
+                {
                     "me mostra como *": "web?:https://google.com"
+                },
+                {
+                    "me mostra como *": "web?:https://google.com"
+                },
+                {
+                    "pesquise informações sobre *": "web?:https://google.com"
+                },
+                {
+                    "encontre artigos sobre *": "web?:https://google.com"
+                },
+                {
+                    "procure notícias sobre *": "web?:https://google.com"
+                },
+                {
+                    "pesquise imagens de *": "web?:https://google.com/imghp"
+                },
+                {
+                    "encontre referências sobre *": "web?:https://wikipedia.org"
+                },
+                {
+                    "pesquise definição de *": "web?:https://google.com"
+                },
+                {
+                    "pesquise exemplos de *": "web?:https://google.com"
+                },
+                {
+                    "dê exemplos de *": "web?:https://google.com"
+                },
+                {
+                    "procure tutoriais sobre *": "web?:https://youtube.com"
+                },
+                {
+                    "pesquise livros sobre *": "web?:https://google.com/books"
+                },
+                {
+                    "encontre cursos sobre *": "web?:https://udemy.com"
+                },
+                {
+                    "pesquise receitas de *": "web?:https://google.com/recipes"
+                },
+                {
+                    "pesquisa de preço de *": "web?:https://google.com/shopping"
+                },
+                {
+                    "pesquise tradução de *": "web?:https://translate.google.com"
+                },
+                {
+                    "pesquise sinônimos de *": "web?:https://dicionario.priberam.org"
+                },
+                {
+                    "encontre músicas de *": "spo!:https://open.spotify.com"
+                },
+                {
+                    "encontre música de *": "spo!:https://open.spotify.com"
+                },   
+                {
+                    "qual o clima hoje": "temp"
+                },
+                {
+                    "pesquise eventos sobre *": "web?:https://eventbrite.com"
                 }
             ]
         }

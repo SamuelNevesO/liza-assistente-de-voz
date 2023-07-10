@@ -35,14 +35,14 @@ class Janela(ctk.CTk):
     
     def tela_login(self):
         
-        self.file_path = os.path.dirname(os.path.realpath(__file__))
-        self.liza = ctk.CTkImage(Image.open(self.file_path + "/liza.png"), size=(500,500))
+        # self.file_path = os.path.dirname(os.path.realpath(__file__))
+        # self.liza = ctk.CTkImage(Image.open(self.file_path + "/liza.png"), size=(500,500))
 
         self.frameT = ctk.CTkFrame(self, width=350, height=380)
         self.frameT.place(x=0, y=0)
         
-        self.lb_img = ctk.CTkLabel(self.frameT,text="", image=self.liza)
-        self.lb_img.grid(row=1, column=0, padx=20, pady=50)
+        # self.lb_img = ctk.CTkLabel(self.frameT,text="", image=self.liza)
+        # self.lb_img.grid(row=1, column=0, padx=20, pady=50)
        
         self.titleB = ctk.CTkLabel(self.frameT, text="Faça o Login ou Cadastre-se\n em nosso site para\n acessar os serviços de Liza!", font=("Roboto", 24, BOLD), )
         self.titleB.grid(row=0, column=0, padx=10, pady=10)
@@ -69,7 +69,7 @@ class Janela(ctk.CTk):
         
         
         cursor = self.conexao.cursor()
-        consulta = "SELECT * FROM usuarios WHERE email = %s AND senha = %s"
+        consulta = "SELECT * FROM Usuario WHERE email = %s AND senha = %s"
         valores = (usuario, senha)
         cursor.execute(consulta, valores)
         
@@ -85,8 +85,8 @@ class Janela(ctk.CTk):
         cursor.close()
     
     def tela_home(self): 
-        self.file_path = os.path.dirname(os.path.realpath(__file__))
-        self.lizaimg = ctk.CTkImage(Image.open(self.file_path + "/liza.png"), size=(200,200))
+        # self.file_path = os.path.dirname(os.path.realpath(__file__))
+        # self.lizaimg = ctk.CTkImage(Image.open(self.file_path + "/liza.png"), size=(200,200))
         
         self.frame_login.place_forget()
         self.frameT.place_forget()
@@ -96,7 +96,7 @@ class Janela(ctk.CTk):
         self.titleB = ctk.CTkLabel(self.navbar, text="Sua Liza já está preparada! Aperte o botão ou pressione a tecla F1\n em seu computador e tudo será controlado por voz!", font=("Roboto", 24, BOLD))
         self.titleB.grid(row=0, column=0, padx=10, pady=10)
         
-        self.btn_login = ctk.CTkButton(self.navbar,width=30, image=self.lizaimg,text="", font=("Roboto", 16, BOLD), corner_radius=200, command=self.lizaEscute)
+        self.btn_login = ctk.CTkButton(self.navbar,width=30,text="", font=("Roboto", 16, BOLD), corner_radius=200, command=self.lizaEscute)
         self.btn_login.grid(row=3, column=0, padx=10, pady=10)
         self.bind("<F1>", lambda event: self.lizaEscute())
         
