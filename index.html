@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liza | Assistente Virtual Open Source por Voz</title>
+  <!-- Arquivo de Estilos Externo -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Barra de Acessibilidade -->
+  <div class="a11y-bar" role="region" aria-label="Opções de Acessibilidade">
+    <button class="a11y-btn" onclick="toggleContrast()">⚡ Alto Contraste</button>
+    <button class="a11y-btn" onclick="changeFontSize(2)">A+ Aumentar Fonte</button>
+    <button class="a11y-btn" onclick="changeFontSize(-2)">A- Diminuir Fonte</button>
+  </div>
+
+  <!-- Cabeçalho -->
+  <header>
+    <div class="header-container">
+      <a href="#" class="logo">🎙️ Projeto Liza</a>
+      <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#comandos">Comandos</a>
+        <a href="#opensource">Open Source</a>
+        <a href="https://github.com/SamuelNevesO/site-assistente-voz" target="_blank">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Apresentação -->
+  <main>
+    <div class="hero">
+      <span class="badge">Projeto de Extensão Universitária • ADS</span>
+      <h1>Liza: Assistente Virtual por Voz Acessível e Código Aberto</h1>
+      <p>
+        Uma solução gratuita pensada para promover a inclusão digital, auxiliar pessoas com dificuldades motoras ou visuais e permitir que toda a comunidade contribua com novos comandos.
+      </p>
+      <div class="btn-group">
+        <a href="https://github.com/SamuelNevesO/site-assistente-voz/releases" class="btn btn-primary">⬇️ Baixar Liza (Versão Beta)</a>
+        <a href="https://github.com/SamuelNevesO/site-assistente-voz" target="_blank" class="btn btn-outline">💻 Ver Código no GitHub</a>
+      </div>
+    </div>
+
+    <!-- Simulador Interativo -->
+    <div class="voice-demo" aria-live="polite">
+      <h2>Teste uma Demonstração da Liza no Navegador</h2>
+      <p style="color: var(--text-muted); margin-top: 6px;">
+        Clique no microfone abaixo e diga: <strong>"Olá Liza"</strong>, <strong>"Que horas são"</strong> ou <strong>"Qual o seu objetivo"</strong>.
+      </p>
+      <button id="micBtn" class="mic-btn" onclick="startVoiceDemo()" title="Ativar comando de voz">🎤</button>
+      <p id="statusText" style="font-weight: 600;">Clique no microfone para falar</p>
+
+      <div class="console-box">
+        <div><strong>Você disse:</strong> <span id="userSpeech">---</span></div>
+        <div style="margin-top: 8px; color: var(--primary);"><strong>Resposta da Liza:</strong> <span id="lizaReply">Aguardando comando de voz...</span></div>
+      </div>
+    </div>
+
+    <!-- Pilares do Projeto -->
+    <section id="sobre">
+      <h2 class="section-title">Por que a Liza foi criada?</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>♿ Acessibilidade Digital</h3>
+          <p>Reduz barreiras de uso do computador para pessoas com limitações motoras, deficiência visual, idosos ou usuários com dificuldade no uso de teclado e mouse.</p>
+        </div>
+        <div class="card">
+          <h3>🔓 100% Open Source (Licença MIT)</h3>
+          <p>Qualquer estudante, desenvolvedor ou entusiasta pode baixar, auditar o código, adaptar para sua realidade e criar novos módulos gratuitamente.</p>
+        </div>
+        <div class="card">
+          <h3>⚙️ Automação Simplificada</h3>
+          <p>Executa tarefas cotidianas do sistema operacional, pesquisas rápidas e leitura de informações utilizando apenas comandos naturais de voz.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comandos Planejados -->
+    <section id="comandos">
+      <h2 class="section-title">Principais Comandos de Voz</h2>
+      <ul class="cmd-list">
+        <li class="cmd-item">
+          <strong>"Liza, abrir navegador"</strong>
+          Inicia o navegador padrão ou aplicativos essenciais do computador sem usar as mãos.
+        </li>
+        <li class="cmd-item">
+          <strong>"Liza, pesquisar por [assunto]"</strong>
+          Realiza buscas automatizadas na web e retorna os resultados principais.
+        </li>
+        <li class="cmd-item">
+          <strong>"Liza, que horas são?"</strong>
+          Informa o horário e a data atual através de síntese de voz (Text-to-Speech).
+        </li>
+        <li class="cmd-item">
+          <strong>"Liza, ler texto da tela"</strong>
+          Módulo voltado à acessibilidade para leitura em voz alta de conteúdos selecionados.
+        </li>
+      </ul>
+    </section>
+
+    <!-- Comunidade e Contribuição -->
+    <section id="opensource">
+      <h2 class="section-title">Como Contribuir com o Projeto</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>1. Para Usuários e Testadores</h3>
+          <p>Baixe a versão demonstrativa, utilize os comandos de voz no seu dia a dia e envie sugestões de melhoria na aba <em>Issues</em> do nosso repositório.</p>
+        </div>
+        <div class="card">
+          <h3>2. Para Desenvolvedores</h3>
+          <p>Faça um <em>Fork</em> do repositório no GitHub, adicione novos comandos de voz na estrutura modular do projeto e envie um <em>Pull Request</em>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Projeto Liza</strong> — Projeto de Extensão Universitária (Análise e Desenvolvimento de Sistemas)</p>
+    <p style="margin-top: 8px; font-size: 0.9rem;">Distribuído sob a Licença MIT • Código aberto para toda a comunidade.</p>
+  </footer>
+
+  <!-- Arquivo de Script Externo -->
+  <script src="script.js"></script>
+</body>
+</html>
