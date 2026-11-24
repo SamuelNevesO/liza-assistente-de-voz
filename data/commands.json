@@ -1,0 +1,182 @@
+{
+    "commands": [
+        {
+            "abrir": [
+                {
+                    "ajuda": "help"
+                },
+                {
+                    "quais são os comandos": "help"
+                },
+                {
+                    "o que você faz": "help"
+                },
+                {
+                    "abrir calculadora": "path:calc.exe"
+                },
+                {
+                    "abrir bloco de notas": "path:notepad.exe"
+                },
+                {
+                    "recarregar comando": "commands"
+                },
+                {
+                    "recarregar comandos": "commands"
+                },
+                {
+                    "recarregue os comandos": "commands"
+                },
+                {
+                    "recarregar os comandos": "commands"
+                },
+                {
+                    "pesquisa por vídeo de *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "pesquise por vídeo de *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "pesquise vídeos de *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "pesquise vídeos sobre *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "pesquisa vídeos de *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "procure por vídeos de *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "procure vídeos de *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "pesquisa por vídeos do *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "pesquise por vídeos do *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "pesquise vídeos do *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "pesquisa vídeos do *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "procure por vídeos do *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "procure vídeos do *": "web?:https://www.youtube.com/results?search_query={query}"
+                },
+                {
+                    "pesquisa sobre *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "pesquisa por *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "pesquise por *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "pesquise como *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "procure por *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "pesquise quais são *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "quais são *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "pesquise os *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "busque por *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "busca por *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "me diz *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "me diga *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "procure aí por *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "pesquise aí por *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "me mostre *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "como *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "me mostra como *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "pesquise informações sobre *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "encontre artigos sobre *": "web?:https://www.google.com/search?q={query}"
+                },
+                {
+                    "procure notícias sobre *": "web?:https://www.google.com/search?tbm=nws&q={query}"
+                },
+                {
+                    "pesquise imagens de *": "web?:https://www.google.com/search?tbm=isch&q={query}"
+                },
+                {
+                    "encontre referências sobre *": "web?:https://pt.wikipedia.org/w/index.php?search={query}"
+                },
+                {
+                    "pesquise definição de *": "web?:https://www.google.com/search?q=defini%C3%A7%C3%A3o+{query}"
+                },
+                {
+                    "pesquise exemplos de *": "web?:https://www.google.com/search?q=exemplos+de+{query}"
+                },
+                {
+                    "dê exemplos de *": "web?:https://www.google.com/search?q=exemplos+de+{query}"
+                },
+                {
+                    "procure tutoriais sobre *": "web?:https://www.youtube.com/results?search_query=tutorial+{query}"
+                },
+                {
+                    "pesquise livros sobre *": "web?:https://www.google.com/search?tbm=bks&q={query}"
+                },
+                {
+                    "encontre cursos sobre *": "web?:https://www.udemy.com/courses/search/?q={query}"
+                },
+                {
+                    "pesquise receitas de *": "web?:https://www.google.com/search?q=receita+de+{query}"
+                },
+                {
+                    "pesquisa de preço de *": "web?:https://www.google.com/search?tbm=shop&q={query}"
+                },
+                {
+                    "pesquise tradução de *": "web?:https://translate.google.com/?sl=auto&tl=pt&text={query}"
+                },
+                {
+                    "pesquise sinônimos de *": "web?:https://dicionario.priberam.org/{query}"
+                },
+                {
+                    "encontre músicas de *": "spo!:https://open.spotify.com/search/{query}"
+                },
+                {
+                    "encontre música de *": "spo!:https://open.spotify.com/search/{query}"
+                },
+                {
+                    "qual o clima hoje": "temp"
+                },
+                {
+                    "pesquise eventos sobre *": "web?:https://www.eventbrite.com/d/online/{query}/"
+                }
+            ]
+        }
+    ]
+}
