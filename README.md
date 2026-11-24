@@ -2,6 +2,8 @@
 
 Aplicação desktop em Python desenvolvida como projeto de extensão (UCSAL) para auxiliar pessoas com limitações motoras, idosos e usuários em geral a interagirem com o computador e serviços web por meio de comandos de voz em português brasileiro.
 
+🌐 **Página do projeto:** https://samuelneveso.github.io/liza-assistente-de-voz/
+
 ## Principais Recursos
 
 - **Reconhecimento e síntese de voz (PT-BR):** captura de áudio via `SpeechRecognition` e retorno falado via `pyttsx3` em thread separada (sem travar a interface).

@@ -1,0 +1,332 @@
+:root {
+  --bg: #ffffff;           /* Fundo principal do site (Branco puro) */
+  --bg-card: #f8fafc;      /* Fundo das caixas/cartões (Azul-acinzentado muito claro para destacar do fundo) */
+  --text: #0f172a;         /* Títulos e texto principal (Azul-escuro profundo / quase preto para legibilidade máxima) */
+  --text-muted: #475569;   /* Parágrafos e textos secundários (Azul-escuro intermédio) */
+  --primary: #2563eb;      /* Botão principal, microfone e destaques (Azul royal vibrante) */
+  --primary-hover: #1d4ed8;/* Cor do botão ao passar o rato (Azul mais escuro) */
+  --accent: #3b82f6;       /* Ícones e links secundários */
+  --border: #e2e8f0;       /* Linhas e bordas finas */
+  --font-size-base: 16px;
+}
+
+body.high-contrast {
+  --bg: #030712;             /* Fundo escuro profundo / azul-noite */
+  --bg-card: #111827;        /* Cartões em tom ligeiramente mais claro para criar profundidade */
+  --text: #ffffff;           /* Texto branco puro para contraste máximo (100% legível) */
+  --text-muted: #cbd5e1;     /* Parágrafos em cinza/branco muito claro */
+  --primary: #facc15;        /* Amarelo-ouro elegante para botões principais e focos */
+  --primary-hover: #eab308;  /* Amarelo ligeiramente mais escuro no hover */
+  --accent: #38bdf8;         /* Ciano suave para detalhes */
+  --border: #475569;         /* Bordas bem definidas em todas as caixas */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+body.high-contrast header {
+  background-color: #030712;
+  border-bottom: 2px solid var(--primary);
+}
+
+body.high-contrast .logo {
+  color: var(--primary);
+}
+
+body.high-contrast nav a {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+body.high-contrast nav a:hover {
+  color: var(--primary);
+}
+
+body.high-contrast .badge {
+  background: #1e293b;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+body.high-contrast .btn-primary {
+  background: var(--primary);
+  color: #000000; /* Texto preto nítido sobre o amarelo */
+  font-weight: 800;
+}
+
+body.high-contrast .btn-outline {
+  background: #111827;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+body.high-contrast .console-box {
+  background: #000000;
+  border: 2px solid var(--primary);
+}
+
+body.high-contrast .cmd-item {
+  background: var(--bg-card);
+  border-left: 5px solid var(--primary);
+}
+
+/* Barra de Acessibilidade */
+.a11y-bar {
+  background: #020617;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  font-size: 0.85rem;
+}
+
+.a11y-btn {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.a11y-btn:hover {
+  border-color: var(--primary);
+}
+
+/* Cabeçalho de ponta a ponta */
+header {
+  width: 100%;
+  border-bottom: 1px solid var(--border);
+  background-color: rgba(255, 255, 255, 0.95); /* Topo branco translúcido */
+  backdrop-filter: blur(8px);
+}
+
+.header-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto 30px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #ffffff; /* Texto branco nítido sobre o botão azul */
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+/* Simulador de Voz */
+.voice-demo {
+  max-width: 750px;
+  margin: 20px auto 60px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+}
+
+.mic-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #000;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  margin: 15px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+  transition: transform 0.2s, background 0.3s;
+}
+
+.mic-btn.listening {
+  background: #ef4444;
+  color: #fff;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.console-box {
+  background: #0f172a; 
+  color: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 20px;
+  text-align: left;
+  font-family: monospace;
+  min-height: 90px;
+}
+
+/* Seções Gerais */
+section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.card h3 {
+  color: var(--primary);
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+}
+
+.cmd-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 15px;
+}
+
+.cmd-item {
+  background: var(--bg-card);
+  border-left: 4px solid var(--primary);
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.cmd-item strong {
+  display: block;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  margin-top: 80px;
+}
