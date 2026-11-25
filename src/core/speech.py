@@ -21,12 +21,24 @@ class ListenResult:
 class SpeechEngine:
     """Encapsula reconhecimento de fala (STT) e síntese de voz (TTS) thread-safe."""
 
-    def __init__(self, language: str = "pt-BR", phrase_time_limit: int = 5) -> None:
+    def __init__(
+        self, language: str = "pt-BR", phrase_time_limit: int = 5, tts_rate: int = 180
+    ) -> None:
         self.language = language
         self.phrase_time_limit = phrase_time_limit
         self.recognizer = sr.Recognizer()
         self._tts_lock = threading.Lock()
         self._tts_engine = pyttsx3.init()
+        self._ambient_calibrated = False
+        self.set_rate(tts_rate)
+
+    def set_rate(self, rate: int) -> None:
+        clamped = max(100, min(300, int(rate)))
+        with self._tts_lock:
+            try:
+                self._tts_engine.setProperty("rate", clamped)
+            except Exception:
+                logger.warning("Não foi possível ajustar a velocidade da voz.")
 
     def speak(self, text: str) -> None:
         if not text:
@@ -41,6 +53,9 @@ class SpeechEngine:
     def listen(self) -> ListenResult:
         try:
             with sr.Microphone() as source:
+                if not self._ambient_calibrated:
+                    self.recognizer.adjust_for_ambient_noise(source, duration=0.4)
+                    self._ambient_calibrated = True
                 audio = self.recognizer.listen(
                     source, timeout=5, phrase_time_limit=self.phrase_time_limit
                 )

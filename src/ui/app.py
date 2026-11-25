@@ -11,6 +11,7 @@ from src.core.speech import SpeechEngine
 from src.domain.usuario import Usuario
 from src.services.auth_service import AuthService
 from src.services.session_service import SessionService
+from src.services.user_config_service import UserConfigService
 from src.services.weather_service import WeatherService
 from src.ui.home_frame import HomeFrame
 from src.ui.login_frame import LoginFrame
@@ -30,9 +31,16 @@ class LizaApp(ctk.CTk):
         super().__init__()
         ctk.set_appearance_mode("dark")
         self.settings = settings or Settings.from_env()
+        self.user_config_service = UserConfigService(self.settings)
+        self.user_config = self.user_config_service.load()
+
         self.auth_service = AuthService(self.settings)
         self.session_service = SessionService()
         self.weather_service = WeatherService(self.settings)
+        self.weather_service.configure(
+            self.user_config.openweather_api_key, self.user_config.weather_city
+        )
+
         self.router = CommandRouter()
         self.executor = ActionExecutor(self.router, self.weather_service)
         self._speech: SpeechEngine | None = None
@@ -79,13 +87,15 @@ class LizaApp(ctk.CTk):
 
     def _show_home(self, usuario: Usuario) -> None:
         if self._speech is None:
-            self._speech = SpeechEngine()
+            self._speech = SpeechEngine(tts_rate=self.user_config.tts_rate)
         home = HomeFrame(
             self,
             usuario,
             self._speech,
             self.router,
             self.executor,
+            self.user_config_service,
+            self.weather_service,
             on_logout=self._logout,
         )
         self._set_frame(home)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import threading
+from collections import deque
 from tkinter.font import BOLD
 from typing import Callable
 
@@ -12,6 +13,9 @@ from src.core.actions import ActionExecutor
 from src.core.command_router import CommandRouter
 from src.core.speech import SpeechEngine
 from src.domain.usuario import Usuario
+from src.services.user_config_service import UserConfig, UserConfigService
+from src.services.weather_service import WeatherService
+from src.ui.modals import AddCommandDialog, SettingsDialog
 
 try:
     import winsound
@@ -37,6 +41,8 @@ class HomeFrame(ctk.CTkFrame):
         speech: SpeechEngine,
         router: CommandRouter,
         executor: ActionExecutor,
+        config_service: UserConfigService,
+        weather_service: WeatherService,
         on_logout: Callable[[], None],
     ) -> None:
         super().__init__(master, fg_color="#0f172a")
@@ -44,8 +50,11 @@ class HomeFrame(ctk.CTkFrame):
         self.speech = speech
         self.router = router
         self.executor = executor
+        self.config_service = config_service
+        self.weather_service = weather_service
         self.on_logout = on_logout
         self._listening = False
+        self._history: deque[str] = deque(maxlen=4)
         self._logo_image = self._load_logo()
         self._build_ui()
 
@@ -63,12 +72,12 @@ class HomeFrame(ctk.CTkFrame):
 
         sidebar = ctk.CTkFrame(self, width=220, fg_color="#0b1120", corner_radius=0)
         sidebar.grid(row=0, column=0, sticky="nsew")
-        sidebar.grid_rowconfigure(4, weight=1)
+        sidebar.grid_rowconfigure(6, weight=1)
         sidebar.grid_columnconfigure(0, weight=1)
 
         if self._logo_image is not None:
             ctk.CTkLabel(sidebar, text="", image=self._logo_image).grid(
-                row=0, column=0, padx=24, pady=(28, 6)
+                row=0, column=0, padx=24, pady=(24, 6)
             )
 
         ctk.CTkLabel(
@@ -76,7 +85,7 @@ class HomeFrame(ctk.CTkFrame):
             text="LIZA",
             font=("Roboto", 20, BOLD),
             text_color="#e2e8f0",
-        ).grid(row=1, column=0, padx=24, pady=(0, 12))
+        ).grid(row=1, column=0, padx=24, pady=(0, 10))
 
         ctk.CTkLabel(
             sidebar,
@@ -91,7 +100,29 @@ class HomeFrame(ctk.CTkFrame):
             font=("Roboto", 13),
             text_color="#94a3b8",
             wraplength=180,
-        ).grid(row=3, column=0, padx=20, pady=(0, 12))
+        ).grid(row=3, column=0, padx=20, pady=(0, 18))
+
+        ctk.CTkButton(
+            sidebar,
+            text="+ Novo Comando",
+            height=36,
+            fg_color="#1e293b",
+            hover_color="#334155",
+            text_color="#e2e8f0",
+            font=("Roboto", 13, BOLD),
+            command=self._open_add_command,
+        ).grid(row=4, column=0, padx=20, pady=(0, 8), sticky="ew")
+
+        ctk.CTkButton(
+            sidebar,
+            text="Configurações",
+            height=36,
+            fg_color="#1e293b",
+            hover_color="#334155",
+            text_color="#e2e8f0",
+            font=("Roboto", 13),
+            command=self._open_settings,
+        ).grid(row=5, column=0, padx=20, pady=0, sticky="ew")
 
         ctk.CTkButton(
             sidebar,
@@ -102,10 +133,10 @@ class HomeFrame(ctk.CTkFrame):
             border_color="#334155",
             text_color="#cbd5e1",
             command=self.on_logout,
-        ).grid(row=5, column=0, padx=24, pady=24, sticky="ew")
+        ).grid(row=7, column=0, padx=20, pady=24, sticky="ew")
 
         main_area = ctk.CTkFrame(self, fg_color="#0f172a", corner_radius=0)
-        main_area.grid(row=0, column=1, padx=48, pady=36, sticky="nsew")
+        main_area.grid(row=0, column=1, padx=48, pady=32, sticky="nsew")
         main_area.grid_columnconfigure(0, weight=1)
 
         ctk.CTkLabel(
@@ -113,14 +144,14 @@ class HomeFrame(ctk.CTkFrame):
             text="Sua Liza está pronta.",
             font=("Roboto", 30, BOLD),
             text_color="#f8fafc",
-        ).grid(row=0, column=0, sticky="w", pady=(12, 4))
+        ).grid(row=0, column=0, sticky="w", pady=(8, 4))
 
         ctk.CTkLabel(
             main_area,
             text="Diga o que você precisa e deixe a Liza cuidar do resto.",
             font=("Roboto", 15),
             text_color="#94a3b8",
-        ).grid(row=1, column=0, sticky="w", pady=(0, 24))
+        ).grid(row=1, column=0, sticky="w", pady=(0, 20))
 
         control_card = ctk.CTkFrame(
             main_area,
@@ -129,7 +160,7 @@ class HomeFrame(ctk.CTkFrame):
             border_width=1,
             border_color="#334155",
         )
-        control_card.grid(row=2, column=0, sticky="ew", pady=(0, 20))
+        control_card.grid(row=2, column=0, sticky="ew", pady=(0, 16))
         control_card.grid_columnconfigure(0, weight=1)
 
         self.status_label = ctk.CTkLabel(
@@ -138,7 +169,7 @@ class HomeFrame(ctk.CTkFrame):
             font=("Roboto", 20, BOLD),
             text_color="#f8fafc",
         )
-        self.status_label.grid(row=0, column=0, padx=28, pady=(24, 4), sticky="w")
+        self.status_label.grid(row=0, column=0, padx=28, pady=(20, 4), sticky="w")
 
         ctk.CTkLabel(
             control_card,
@@ -157,17 +188,17 @@ class HomeFrame(ctk.CTkFrame):
             hover_color="#0369a1",
             command=self.start_listening,
         )
-        self.listen_btn.grid(row=2, column=0, padx=28, pady=(0, 14), sticky="w")
+        self.listen_btn.grid(row=2, column=0, padx=28, pady=(0, 12), sticky="w")
 
         self.transcript_label = ctk.CTkLabel(
             control_card,
-            text="Último comando: —",
+            text="Histórico recente: —",
             font=("Roboto", 13),
             text_color="#cbd5e1",
             wraplength=760,
             justify="left",
         )
-        self.transcript_label.grid(row=3, column=0, padx=28, pady=(0, 22), sticky="w")
+        self.transcript_label.grid(row=3, column=0, padx=28, pady=(0, 18), sticky="w")
 
         help_card = ctk.CTkFrame(
             main_area,
@@ -193,6 +224,26 @@ class HomeFrame(ctk.CTkFrame):
             text_color="#94a3b8",
             justify="left",
         ).grid(row=1, column=0, padx=20, pady=(0, 14), sticky="w")
+
+    def _open_add_command(self) -> None:
+        AddCommandDialog(
+            self.winfo_toplevel(),
+            self.router,
+            on_changed=lambda: self.status_label.configure(text="Comandos atualizados"),
+        )
+
+    def _open_settings(self) -> None:
+        SettingsDialog(
+            self.winfo_toplevel(),
+            self.config_service,
+            self.weather_service,
+            on_saved=self._apply_user_config,
+        )
+
+    def _apply_user_config(self, config: UserConfig) -> None:
+        self.weather_service.configure(config.openweather_api_key, config.weather_city)
+        self.speech.set_rate(config.tts_rate)
+        self.status_label.configure(text="Configurações salvas")
 
     def _play_beep(self) -> None:
         bip_path = resource_path("assets/bip.wav")
@@ -224,7 +275,7 @@ class HomeFrame(ctk.CTkFrame):
             self.after(
                 0,
                 lambda: self._finish_listening(
-                    "Comando não reconhecido", f'Último comando: "{result.text}"'
+                    "Comando não reconhecido", f'"{result.text}" → {feedback}'
                 ),
             )
             self.speech.speak(feedback)
@@ -234,15 +285,16 @@ class HomeFrame(ctk.CTkFrame):
         self.after(
             0,
             lambda: self._finish_listening(
-                "Pronta para ouvir", f'Último comando: "{result.text}" → {response_text}'
+                "Pronta para ouvir", f'"{result.text}" → {response_text}'
             ),
         )
         self.speech.speak(response_text)
 
-    def _finish_listening(self, status_text: str, transcript_text: str) -> None:
+    def _finish_listening(self, status_text: str, entry_text: str) -> None:
         if not self.winfo_exists():
             return
         self._listening = False
         self.listen_btn.configure(state="normal", text="Ativar escuta")
         self.status_label.configure(text=status_text)
-        self.transcript_label.configure(text=transcript_text)
+        self._history.appendleft(entry_text)
+        self.transcript_label.configure(text="Histórico recente:\n" + "\n".join(self._history))
