@@ -1,0 +1,14 @@
+.env
+*.db
+__pycache__/
+*.py[cod]
+*$py.class
+build/
+dist/
+.pytest_cache/
+.coverage
+htmlcov/
+logs/
+data/session.json
+.venv/
+venv/
