@@ -9,6 +9,7 @@ def _make_engine(monkeypatch):
     mock_tts = MagicMock()
     monkeypatch.setattr("src.core.speech.pyttsx3.init", MagicMock(return_value=mock_tts))
     engine = SpeechEngine()
+    monkeypatch.setattr(engine.recognizer, "adjust_for_ambient_noise", MagicMock())
     return engine, mock_tts
 
 

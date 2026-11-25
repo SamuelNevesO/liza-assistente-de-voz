@@ -10,5 +10,7 @@ dist/
 htmlcov/
 logs/
 data/session.json
+data/user_config.json
+data/user_commands.json
 .venv/
 venv/
